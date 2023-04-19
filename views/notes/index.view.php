@@ -9,8 +9,8 @@
 
 <body class="h-full">
     <div class="min-h-full">
-        <?php require VIEWS_PATH . '/partials/nav.view.php' ?>
-        <?php require VIEWS_PATH . '/partials/header.view.php' ?>
+        <?php require base_path( 'views/partials/nav.view.php') ?>
+        <?php require base_path('views/partials/header.view.php') ?>
         <main>
             <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
                 <!-- Replace with your content -->
@@ -20,14 +20,16 @@
                         <?php if (count($notes)) : ?>
                             <?php foreach ($notes as $note) : ?>
                                 <article>
-                                    <p><a class="underline text-blue-500" href="/note?id=<?= $note['id']; ?>"><?= $note["description"] ?></a></p>
+                                    <p>
+                                        <a class="underline text-blue-500" href="/note?id=<?= $note['id']; ?>"><?= htmlspecialchars($note["description"]) ?></a>
+                                    </p>
                                 </article>
                             <?php endforeach ?>
                         <?php else : ?>
                             <p>Il n’y a pas de note à afficher</p>
                         <?php endif ?>
                     </div>
-                    <div><a class="text-blue-500 underline" href="/note-create">Create a new note</a></div>
+                    <div><a class="text-blue-500 underline" href="/notes/create">Create a new note</a></div>
                 </div>
                 <!-- /End replace -->
             </div>
