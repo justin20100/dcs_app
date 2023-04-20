@@ -46,7 +46,7 @@ VALUES
 UNLOCK TABLES;
 
 
-# Dump of table users
+# Dump of table userAccount
 # ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `users`;

@@ -14,6 +14,8 @@
 
                                 <a href="/contact" class="<?= urlIs('/contact') ? STYLES_CONFIG['nav-active'] : STYLES_CONFIG['nav-inactive'] ?> px-3 py-2 rounded-md text-sm font-medium">Contact</a>
                                 <a href="/notes" class="<?= urlIs('/notes') ? STYLES_CONFIG['nav-active'] : STYLES_CONFIG['nav-inactive'] ?> px-3 py-2 rounded-md text-sm font-medium">Notes</a>
+
+                                <a href="/register" class="<?= urlIs('/userAccount') ? STYLES_CONFIG['nav-active'] : STYLES_CONFIG['nav-inactive'] ?> px-3 py-2 rounded-md text-sm font-medium">Register</a>
                             </div>
                         </div>
                     </div>
