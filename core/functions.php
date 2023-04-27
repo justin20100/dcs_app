@@ -21,6 +21,9 @@ function view($path,array $params)
 {
     extract($params);
     require base_path('views/'.$path);
+    $_SESSION['errors'] = [];
+    $_SESSION['olds'] = [];
+    $_SESSION['flash'] = [];
 }
 
 function generatePassword(int $length = 15){

@@ -5,6 +5,11 @@
     <meta charset="UTF-8">
     <title></title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <?php if (isset($_SESSION['flash']['succes'])): ?>
+        <script>
+            alert('<?= $_SESSION['flash']['succes'] ?>')
+        </script>
+    <?php endif; ?>
 </head>
 
 <body class="h-full">

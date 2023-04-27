@@ -7,6 +7,8 @@ define('CONTROLLERS_PATH', base_path('controllers/'));
 define('STYLES_CONFIG', require base_path('config/styles.php'));
 define('ENV_FILE', base_path('env.local.ini'));
 
+session_start();
+
 $router = new \Core\Router();
 require base_path('routes.php');
 

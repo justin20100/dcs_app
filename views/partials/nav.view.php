@@ -15,10 +15,14 @@
                                 <a href="/contact" class="<?= urlIs('/contact') ? STYLES_CONFIG['nav-active'] : STYLES_CONFIG['nav-inactive'] ?> px-3 py-2 rounded-md text-sm font-medium">Contact</a>
                                 <a href="/notes" class="<?= urlIs('/notes') ? STYLES_CONFIG['nav-active'] : STYLES_CONFIG['nav-inactive'] ?> px-3 py-2 rounded-md text-sm font-medium">Notes</a>
 
-                                <a href="/register" class="<?= urlIs('/userAccount') ? STYLES_CONFIG['nav-active'] : STYLES_CONFIG['nav-inactive'] ?> px-3 py-2 rounded-md text-sm font-medium">Register</a>
+                                <?php if (!isset($_SESSION['user'])): ?>
+                                    <a href="/register" class="<?= urlIs('/userAccount') ? STYLES_CONFIG['nav-active'] : STYLES_CONFIG['nav-inactive'] ?> px-3 py-2 rounded-md text-sm font-medium">Register</a>
+                                <a href="/login" class="<?= urlIs('/userAccount') ? STYLES_CONFIG['nav-active'] : STYLES_CONFIG['nav-inactive'] ?> px-3 py-2 rounded-md text-sm font-medium">Login</a>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
+                    <?php if (isset($_SESSION['user'])): ?>
                     <div class="hidden md:block">
                         <div class="ml-4 flex items-center md:ml-6">
                             <button type="button" class="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
@@ -50,15 +54,16 @@
               -->
                                 <div class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
                                     <!-- Active: "bg-gray-100", Not Active: "" -->
-                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
-
-                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
-
-                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</a>
+                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0"><?= $_SESSION['user']['firstname'].' '.$_SESSION['user']['lastname'] ?></a>
+                                    <form action="/logout" method="post">
+                                        <input type="hidden" name="_method" value="delete">
+                                        <button class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2 signOut" type="submit">Sign out</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <?php endif; ?>
                     <div class="-mr-2 flex md:hidden">
                         <!-- Mobile menu button -->
                         <button type="button" class="inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" aria-controls="mobile-menu" aria-expanded="false">

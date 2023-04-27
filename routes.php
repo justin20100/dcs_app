@@ -13,11 +13,13 @@ $router->delete('/note/delete','notes/destroy.php');
 $router->get('/note/update','notes/update.php');
 $router->put('/note/put','notes/put.php');
 
-//userAccount
-$router->get('/users','userAccount/index.php');
-$router->get('/user','userAccount/show.php');
+//userAccount creation
 $router->get('/register','userAccount/create.php');
 $router->post('/register','userAccount/store.php');
-$router->delete('/user/delete','userAccount/destroy.php');
-$router->get('/user/update','userAccount/update.php');
-$router->put('/user/put','userAccount/put.php');
+
+//userAccount login
+$router->get('/login','userSession/create.php');
+$router->post('/login','userSession/store.php');
+
+// userAcount logout
+$router->delete('/logout','userSession/destroy.php');
