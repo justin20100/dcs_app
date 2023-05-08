@@ -22,28 +22,24 @@ class Database
         $username = $settings['database']['username'];
         $password = $settings['database']['password'];
         $this->connection = new PDO($dsn, $username, $password, [
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         ]);
     }
-
     public function query(string $sql, array $params = []): Database
     {
         $this->st = $this->connection->prepare($sql);
         $this->st->execute($params);
         return $this;
     }
-
     public function all(): array
     {
         return $this->st->fetchAll();
     }
-
-    public function find(): array|bool
+    public function find(): object|bool
     {
         return $this->st->fetch();
     }
-
     public function findOrFail()
     {
         $row = $this->find();

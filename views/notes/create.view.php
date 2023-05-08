@@ -13,7 +13,7 @@
         <?php require base_path('views/partials/header.view.php') ?>
         <main>
             <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-                <form method="post" action="/notes">
+                <form method="post" action="/notes" enctype="multipart/form-data">
                     <div class="space-y-12">
                         <div class="border-b border-gray-900/10 pb-12">
                             <h2 class="text-base font-semibold leading-7 text-gray-900">Create a new note</h2>
@@ -31,6 +31,18 @@
                                     </div>
                                     <p class="mt-3 text-sm leading-6 text-gray-600">Write a new note.</p>
                                 </div>
+
+                                <div class="col-span-full">
+                                    <label for="thumbnail" class="block text-sm font-medium leading-6 text-gray-900">File</label>
+                                    <div class="mt-2">
+                                        <input type="hidden" name="MAX_FILE_SIZE" value="2000000"/>
+                                        <input type="file" id="thumbnail" name="thumbnail" class="block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 px-1.5 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:py-1.5 sm:text-sm sm:leading-6">
+                                    </div>
+                                    <?php if (isset($_SESSION['errors']['file'])) : ?>
+                                        <p><?= $_SESSION['errors']['file'] ?></p>
+                                    <?php endif ?>
+                                </div>
+
                                 <input type="hidden" name="currentUserId" value="<?= $currentUserId ?>">
                                 <div class="mt-6 flex items-center justify-end gap-x-6">
                                     <button type="submit" class="rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Add the new note</button>

@@ -17,15 +17,15 @@
                 <div class="px-4 py-6 sm:px-0">
                     <div class="h-96 rounded-lg border-4 border-dashed border-gray-200">
                         <h1>Ma note</h1>
-                        <p><?= htmlspecialchars($note["description"]) ?></p>
+                        <p><?= htmlspecialchars($note->description) ?></p>
                     </div>
                     <form action="note/delete" method="POST">
                         <input type="hidden" name="_method" value="delete">
-                        <input type="hidden" name="id" value="<?= $note["id"] ?>">
+                        <input type="hidden" name="id" value="<?= $note->id ?>">
                         <button type="submit">suprimer la note</button>
                     </form>
                     <div>
-                        <a href="/note/update?id=<?= $note['id']; ?>">modifier la note</a>
+                        <a href="/note/update?id=<?= $note->id; ?>">modifier la note</a>
                     </div>
                     <div>
                         <a href="/notes">Retourner à l'index des notes</a>

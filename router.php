@@ -12,3 +12,4 @@ function routeToController(string $path): void
         Response::abort();
     }
 }
+

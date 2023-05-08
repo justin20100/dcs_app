@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($errors)){
         $description = $_POST['description'];
         $database = new Database(ENV_FILE);
-        $database->query('INSERT INTO notes(description, user_id) values(:description, :currentUserId)', ['description' => $description, 'currentUserId' => $currentUserId]);
+        $database->query('INSERT INTO notes(description, user_id) values(:description, :currentUserId)', ['description' => $description, 'currentUserId' => $_SESSION['user']->id]);
         Response::redirect('Location: http://dcs_app.test/notes');
     }else{
         $heading = 'create note';

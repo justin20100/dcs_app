@@ -19,8 +19,8 @@
                         <h1>Modifier ma note</h1>
                         <form action="/note/put" method="POST">
                             <input type="hidden" name="_method" value="put">
-                            <input type="hidden" name="id" value="<?= $note["id"] ?>">
-                            <input type="text" name="description" value="<?= htmlspecialchars($note["description"]) ?>">
+                            <input type="hidden" name="id" value="<?= $note->id ?>">
+                            <input type="text" name="description" value="<?= htmlspecialchars($note->description) ?>">
                             <button type="submit">Enregister les modifications</button>
                         </form>
                     </div>

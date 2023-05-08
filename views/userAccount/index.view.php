@@ -20,9 +20,9 @@
                     <?php if (count($users)) : ?>
                         <?php foreach ($users as $user) : ?>
                             <article>
-                                <p>- <?= $user['firstname'].' '.$user['lastname'].' -> '.$user['email'] ?></p>
+                                <p>- <?= $user->firstname'].' '.$user['lastname'].' -> '.$user['email ?></p>
                                 <p>
-                                    <a class="underline text-blue-500" href="/user?id=<?= $user['id']; ?>">Voir le user</a>
+                                    <a class="underline text-blue-500" href="/user?id=<?= $user->id; ?>">Voir le user</a>
                                 </p>
                             </article>
                         <?php endforeach ?>

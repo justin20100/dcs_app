@@ -18,7 +18,7 @@ $user = $database->query('SELECT * FROM users where email = :email', ['email' =>
 if (!$user){
     $_SESSION['errors']['email'] = "Cette email n'est pas enregistrée dans notre base de données";
 }else{
-    if(!password_verify($_POST['password'],$user['password'])){
+    if(!password_verify($_POST['password'],$user->password)){
         $_SESSION['errors']['password'] = 'password incorrecte';
     }
 }
@@ -26,7 +26,7 @@ if (!$user){
 if (empty($_SESSION['errors'])) {
     $_SESSION['user'] = $user;
     $location = $_SERVER['HTTP_ORIGIN'];
-    $_SESSION['flash']['succes'] ='Welcome back '.$user['firstname'];
+    $_SESSION['flash']['succes'] ='Welcome back '.$user->firstname;
 } else {
     $location = $_SERVER['HTTP_REFERER'];
 }

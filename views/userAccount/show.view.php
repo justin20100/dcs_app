@@ -16,16 +16,16 @@
             <!-- Replace with your content -->
             <div class="px-4 py-6 sm:px-0">
                 <div class="h-96 rounded-lg border-4 border-dashed border-gray-200">
-                    <h1>Page du user <?= $user['firstname'].' '.$user['lastname']?></h1>
-                    <p>email -> <?= $user['email'] ?></p>
+                    <h1>Page du user <?= $user->firstname'].' '.$user['lastname?></h1>
+                    <p>email -> <?= $user->email ?></p>
                 </div>
                 <form action="user/delete" method="POST">
                     <input type="hidden" name="_method" value="delete">
-                    <input type="hidden" name="id" value="<?= $user["id"] ?>">
+                    <input type="hidden" name="id" value="<?= $user->id ?>">
                     <button type="submit">Suprimer le user</button>
                 </form>
                 <div>
-                    <a href="/user/update?id=<?= $user['id']; ?>">Modifier le user</a>
+                    <a href="/user/update?id=<?= $user->id; ?>">Modifier le user</a>
                 </div>
                 <div>
                     <a href="/users">Retourner à l'index des users</a>

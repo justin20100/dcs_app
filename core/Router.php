@@ -2,47 +2,65 @@
 
 namespace Core;
 
+use Core\Middleware\Middleware;
+use Exception;
+
 class Router
 {
     protected array $routes = [];
 
     protected function add($method, $uri, $controller)
     {
-        $this->routes[] = compact('method', 'uri', 'controller');
+        $middleware = null;
+        $this->routes[] = compact('method', 'uri', 'controller','middleware');
+        return $this;
     }
 
-    public function get(string $uri, string $controller)
+    public function get(string $uri, array|string $controller)
     {
-        $this->add('GET', $uri, $controller);
+        return $this->add('GET', $uri, $controller);
     }
 
-    public function post(string $uri, string $controller)
+    public function post(string $uri, array|string $controller)
     {
-        $this->add('POST', $uri, $controller);
+        return $this->add('POST', $uri, $controller);
     }
 
-    public function put(string $uri, string $controller)
+    public function put(string $uri, array|string $controller)
     {
-        $this->add('PUT', $uri, $controller);
+        return $this->add('PUT', $uri, $controller);
     }
 
     public function patch(string $uri, string $controller)
     {
-        $this->add('PATCH', $uri, $controller);
+        return $this->add('PATCH', $uri, $controller);
     }
 
-    public function delete(string $uri, string $controller)
+    public function delete(string $uri, array|string $controller)
     {
-        $this->add('DELETE', $uri, $controller);
+        return $this->add('DELETE', $uri, $controller);
+    }
+
+    public function only(string $key){
+        $this->routes[array_key_last($this->routes)]['middleware'] = $key;
     }
 
     public function route($uri,$method)
     {
-        foreach ($this->routes as $route) {
-            if ($route['uri'] === $uri && $route['method'] === strtoupper($method)) {
-                return require base_path('controllers/' . $route['controller']);
+        $routes = array_values(array_filter($this->routes, fn ($r) => $uri === $r['uri'] && strtoupper($method) === $r['method']));
+        if (empty($routes)) {
+            Response::abort();
+        }
+        if (!is_null($routes[0]['middleware'])){
+            try {
+                Middleware::resolve($routes[0]['middleware']);
+            } catch (Exception $e) {
+                die($e->getMessage());
             }
         }
-        Response::abort();
+        $controller = new $routes[0]['controller'][0];
+        $controllerMethod = $routes[0]['controller'][1];
+        call_user_func([$controller, $controllerMethod]);
+//        require base_path('controllers/'. $routes[0]['controller']);
     }
 }
