@@ -48,21 +48,16 @@ class Validator
 
     public static function file(){
         if (!empty($_FILES['thumbnail']['tmp_name'])){
-            Image::configure(['driver' => 'gd']);
-            $upload_img_dir = '/Users/justinvincent/Documents/Ecole/HEPL/3E/2022_2023_cours/devcoteserveur/dcs_app/storage/public/img';
-            $parts = explode('.',$_FILES['thumbnail']['name']);
-            $ext = $parts[array_key_last($parts)];
-            $tmp_file = $_FILES['thumbnail']['tmp_name'];
-            $image = Image::make($tmp_file);
-            $height = (300*$image->height()) / $image->width();
-            $image->resize(300, $height);
-            $file_name_300 = sha1_file($tmp_file).'300.'.$ext;
-            $destination_file = $upload_img_dir . '/' . $file_name_300;
-            $image->save($destination_file);
+            // verifier le type de fichier envoyé
+            if ($_FILES){
+                return true;
+            }else{
+                $_SESSION['errors']['file'] = "Ce fichier n'est pas une image valide";
+                return false;
+            }
         }else{
             $_SESSION['errors']['file'] = "Vous avez oublié d'ajouter une image";
             return false;
         }
-        return '';
     }
 }

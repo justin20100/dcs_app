@@ -11,7 +11,7 @@ class Router
 
     protected function add($method, $uri, $controller)
     {
-        $middleware = null;
+        $middleware = [];
         $this->routes[] = compact('method', 'uri', 'controller','middleware');
         return $this;
     }
@@ -41,11 +41,17 @@ class Router
         return $this->add('DELETE', $uri, $controller);
     }
 
-    public function only(string $key){
-        $this->routes[array_key_last($this->routes)]['middleware'] = $key;
+    public function only(string $key):Router{
+        $this->routes[array_key_last($this->routes)]['middleware'][] = $key;
+        return $this;
     }
 
-    public function route($uri,$method)
+    public function csrf(string $key):Router{
+        $this->routes[array_key_last($this->routes)]['middleware'][] = 'csrf';
+        return $this;
+    }
+
+    public function route($uri,$method):Router
     {
         $routes = array_values(array_filter($this->routes, fn ($r) => $uri === $r['uri'] && strtoupper($method) === $r['method']));
         if (empty($routes)) {
